@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Button, useTheme } from "@mui/material";
 import LandingFeatures from "./landing_features";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   const colorTheme = useTheme().palette;
@@ -44,14 +45,21 @@ function LandingPage() {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Button
           variant="contained"
-          size="large"
           color="btnColor"
           style={{
-            color: isHovered ? "whitesmoke" : "black",
-            borderRadius: "20px",
+            height: "60px",
+            width: "200px",
+            color: isHovered
+              ? colorTheme.primary.main
+              : colorTheme.primary.dark,
+            borderRadius: "50px",
+            fontSize: "18px",
+            fontWeight: "600",
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          LinkComponent={Link}
+          to="/signup"
         >
           Get Started
         </Button>
@@ -68,17 +76,17 @@ function LandingPage() {
           alt="accounts"
         />
         <LandingFeatures
-          img="allaccounts.jpg"
+          img="projectshow.jpg"
           text="Showcase your projets to the world."
           alt="projects"
         />
         <LandingFeatures
-          img="allaccounts.jpg"
+          img="connect.jpg"
           text="Connect with students having similar interests."
           alt="connect"
         />
         <LandingFeatures
-          img="allaccounts.jpg"
+          img="findjobs.jpg"
           text="Find recruiters on the basis of your relevant skills."
           alt="recruiters"
         />

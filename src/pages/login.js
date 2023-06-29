@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
@@ -42,11 +43,26 @@ const LoginPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    let config = {
+      method: "post",
+      mode: "cors",
+      maxBodyLength: Infinity,
+      url: "http://localhost:8000/api/auth/login",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { email: email, password: password },
+    };
 
-    setEmail("");
-    setPassword("");
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

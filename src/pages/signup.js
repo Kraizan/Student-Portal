@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
@@ -49,18 +50,29 @@ const SignUpPage = () => {
     setConfirmPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("Full Name:", fullName);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Confirm Password:", confirmPassword);
+    let config = {
+      method: "post",
+      mode: "cors",
+      maxBodyLength: Infinity,
+      url: "http://localhost:8000/api/auth/register",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { email: email, password: password },
+    };
 
-    setFullName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

@@ -1,12 +1,12 @@
-import React from "react";
-import NavBar from "../components/navbar";
+import { React } from "react";
+import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import LandingPage from "../components/landing";
 
-function HomePage() {
+function HomePage({ isLoggedIn }) {
   return (
     <div style={{ width: "100%" }}>
-      <NavBar />
+      <Navbar isLoggedIn={isLoggedIn} />
       <LandingPage />
       <Footer />
     </div>

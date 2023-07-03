@@ -7,7 +7,7 @@ import TextInputField from "../components/input_field";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 
-const LoginPage = () => {
+const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
@@ -58,6 +58,7 @@ const LoginPage = () => {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        setIsLoggedIn(true);
         navigate("/home");
       })
       .catch((error) => {

@@ -1,10 +1,21 @@
-import React from "react";
+import { React, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import DrawerNavigation from "./drawer";
-import Avatar from "@mui/material/Avatar";
+import { Button, IconButton } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
-function NavBar() {
+function Navbar({ isLoggedIn }) {
   const colorTheme = useTheme().palette;
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   return (
     <nav
       style={{
@@ -26,24 +37,38 @@ function NavBar() {
       >
         Student Portal
       </div>
-      <div
-        style={{
-          padding: "5px",
-          backgroundColor: "lightgrey",
-          borderRadius: "30px",
-        }}
-      >
-        <Avatar
-          alt="Random User"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png"
-          sx={{
-            borderRadius: "30px",
-          }}
-        />
+      <div>
+        {isLoggedIn ? (
+          <IconButton color="inherit">
+            <AccountCircle style={{ backgroundColor: "black" }} />
+          </IconButton>
+        ) : (
+          <Link to="/signup">
+            <Button
+              variant="contained"
+              color="btnColor"
+              style={{
+                backgroundColor: isHovered
+                  ? colorTheme.btnColor2.dark
+                  : colorTheme.btnColor2.main,
+                height: "50px",
+                width: "120px",
+                color: colorTheme.primary.main,
+                borderRadius: "30px",
+                fontSize: "15px",
+                fontWeight: "600",
+              }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              Sign In
+            </Button>
+          </Link>
+        )}
       </div>
       {/* <DrawerNavigation /> */}
     </nav>
   );
 }
 
-export default NavBar;
+export default Navbar;

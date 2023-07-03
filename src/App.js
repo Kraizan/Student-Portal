@@ -1,25 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/theme";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/home";
 import SignUpPage from "./pages/signup";
 import LoginPage from "./pages/login";
+import EditProfilePage from "./pages/edit_profile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    // Make API call to check if user is logged in
-    fetch("/auth/isLoggedIn")
-      .then((res) => res.json())
-      .then((data) => {
-        setIsLoggedIn(data.isLoggedIn);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -43,7 +33,14 @@ function App() {
           <Route
             exact
             path="/home"
-            element={<HomePage isLoggedIn={isLoggedIn} />}
+            element={
+              <HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }
+          ></Route>
+          <Route
+            exact
+            path="/edit-profile"
+            element={<EditProfilePage />}
           ></Route>
         </Routes>
       </Router>

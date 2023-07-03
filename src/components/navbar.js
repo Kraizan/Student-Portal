@@ -1,13 +1,15 @@
 import { React, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import DrawerNavigation from "./drawer";
-import { Button, IconButton } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Avatar, Button, IconButton, Menu, MenuItem } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar({ isLoggedIn }) {
+function Navbar(props) {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -16,6 +18,20 @@ function Navbar({ isLoggedIn }) {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenuClick = (route) => {
+    handleMenuClose();
+    navigate(route);
+  };
+
   return (
     <nav
       style={{
@@ -38,12 +54,37 @@ function Navbar({ isLoggedIn }) {
         Student Portal
       </div>
       <div>
-        {isLoggedIn ? (
+        {props.isLoggedIn ? (
           <IconButton color="inherit">
-            <AccountCircle style={{ backgroundColor: "black" }} />
+            <Avatar
+              onClick={handleMenuOpen}
+              sx={{ bgcolor: "grey", width: "55px", height: "55px" }}
+            ></Avatar>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={() => handleMenuClick("/profile")}>
+                My Profile
+              </MenuItem>
+              <MenuItem onClick={() => handleMenuClick("/edit-profile")}>
+                Edit Profile
+              </MenuItem>
+              <MenuItem onClick={() => handleMenuClick("/settings")}>
+                Settings
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  props.setIsLoggedIn(false);
+                }}
+              >
+                Log out
+              </MenuItem>
+            </Menu>
           </IconButton>
         ) : (
-          <Link to="/signup">
+          <Link to="/login">
             <Button
               variant="contained"
               color="btnColor"

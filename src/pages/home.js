@@ -3,10 +3,13 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import LandingPage from "../components/landing";
 
-function HomePage({ isLoggedIn }) {
+function HomePage(props) {
   return (
     <div style={{ width: "100%" }}>
-      <Navbar isLoggedIn={isLoggedIn} />
+      <Navbar
+        isLoggedIn={props.isLoggedIn}
+        setIsLoggedIn={props.setIsLoggedIn}
+      />
       <LandingPage />
       <Footer />
     </div>

@@ -58,6 +58,7 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        localStorage.setItem("user", email);
         setIsLoggedIn(true);
         navigate("/home");
       })

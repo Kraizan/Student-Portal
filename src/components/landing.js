@@ -71,14 +71,14 @@ function LandingPage() {
         }}
       >
         <LandingFeatures
-          img="allaccounts.jpg"
-          text="All your programming accounts at one place."
-          alt="accounts"
-        />
-        <LandingFeatures
           img="projectshow.jpg"
           text="Showcase your projets to the world."
           alt="projects"
+        />
+        <LandingFeatures
+          img="allaccounts.jpg"
+          text="All your programming accounts at one place."
+          alt="accounts"
         />
         <LandingFeatures
           img="connect.jpg"

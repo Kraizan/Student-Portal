@@ -1,13 +1,21 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import DrawerNavigation from "./drawer";
-import { Avatar, Button, IconButton, Menu, MenuItem } from "@mui/material";
+import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-function Navbar(props) {
+function Navbar() {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      console.log(user);
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -32,6 +40,12 @@ function Navbar(props) {
     navigate(route);
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
+
   return (
     <nav
       style={{
@@ -54,8 +68,8 @@ function Navbar(props) {
         Student Portal
       </div>
       <div>
-        {props.isLoggedIn ? (
-          <IconButton color="inherit">
+        {isLoggedIn ? (
+          <Button color="inherit">
             <Avatar
               onClick={handleMenuOpen}
               sx={{ bgcolor: "grey", width: "55px", height: "55px" }}
@@ -65,24 +79,15 @@ function Navbar(props) {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={() => handleMenuClick("/profile")}>
+              <MenuItem onClick={() => handleMenuClick("/my-profile")}>
                 My Profile
-              </MenuItem>
-              <MenuItem onClick={() => handleMenuClick("/edit-profile")}>
-                Edit Profile
               </MenuItem>
               <MenuItem onClick={() => handleMenuClick("/settings")}>
                 Settings
               </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  props.setIsLoggedIn(false);
-                }}
-              >
-                Log out
-              </MenuItem>
+              <MenuItem onClick={handleLogOut}>Log out</MenuItem>
             </Menu>
-          </IconButton>
+          </Button>
         ) : (
           <Link to="/login">
             <Button
@@ -107,7 +112,6 @@ function Navbar(props) {
           </Link>
         )}
       </div>
-      {/* <DrawerNavigation /> */}
     </nav>
   );
 }

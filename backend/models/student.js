@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const studentSchema = new mongoose.Schema({
   fullName: String,
   email: String,
@@ -25,7 +26,7 @@ const studentSchema = new mongoose.Schema({
       title: String,
       link: String,
       startedOn: Date,
-      useCaseDescription: String,
+      description: String,
       techStack: [String],
     },
   ],
@@ -39,4 +40,5 @@ const studentSchema = new mongoose.Schema({
     },
   ],
 });
+
 module.exports = mongoose.model("Student", studentSchema);

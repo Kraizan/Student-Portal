@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/home";
 import SignUpPage from "./pages/signup";
 import LoginPage from "./pages/login";
-import EditProfilePage from "./pages/edit_profile";
+import MyProfilePage from "./pages/my_profile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,11 +37,7 @@ function App() {
               <HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             }
           ></Route>
-          <Route
-            exact
-            path="/edit-profile"
-            element={<EditProfilePage />}
-          ></Route>
+          <Route exact path="/my-profile" element={<MyProfilePage />}></Route>
         </Routes>
       </Router>
     </ThemeProvider>

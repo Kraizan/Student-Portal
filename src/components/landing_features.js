@@ -1,14 +1,17 @@
+import { useTheme } from "@emotion/react";
 import React from "react";
 
 function LandingFeatures(props) {
+  const colorTheme = useTheme().palette;
   return (
     <div
       style={{
-        width: "18%",
+        width: "17%",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
+        color: colorTheme.primary.main,
       }}
     >
       <div style={{ width: "auto", textAlign: "center" }}>
@@ -21,7 +24,9 @@ function LandingFeatures(props) {
           alt={props.alt}
         ></img>
       </div>
-      <div style={{ height: "100%", textAlign: "center" }}>{props.text}</div>
+      <div style={{ marginTop: "5px", height: "50px", textAlign: "center" }}>
+        {props.text}
+      </div>
     </div>
   );
 }

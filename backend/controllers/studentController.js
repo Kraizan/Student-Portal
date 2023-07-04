@@ -1,4 +1,14 @@
 const Student = require("../models/student");
+
+// Get all Students
+exports.getAllStudents = async (req, res) => {
+  try {
+    const students = await Student.find();
+    res.json(students);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 // Create Student
 exports.createStudent = async (req, res) => {
   try {

@@ -1,8 +1,8 @@
-import { Delete } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import React from "react";
+import DeleteWorkButton from "./delete_work_button";
 
-function WorkExperienceCard({ data }) {
+function WorkExperienceCard({ data, setData }) {
   return (
     <div
       style={{
@@ -17,7 +17,7 @@ function WorkExperienceCard({ data }) {
             {data.company}
           </Typography>
           <div>
-            <Delete color="error" />
+            <DeleteWorkButton data={data} setData={setData} />
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>

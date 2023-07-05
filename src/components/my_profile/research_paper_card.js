@@ -1,9 +1,9 @@
 import { useTheme } from "@emotion/react";
-import { Delete } from "@mui/icons-material";
 import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";
+import DeleteWorkButton from "./delete_work_button";
 
-function ResearchPaperCard({ paper }) {
+function ResearchPaperCard({ paper, setData }) {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -28,7 +28,7 @@ function ResearchPaperCard({ paper }) {
           {paper.title}
         </Typography>
         <div>
-          <Delete color="error" />
+          <DeleteWorkButton data={paper} setData={setData} />
         </div>
       </div>
 

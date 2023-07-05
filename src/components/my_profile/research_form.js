@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import AddWorkButton from "./add_work_button";
 
-const ResearchForm = () => {
+const ResearchForm = ({ setData }) => {
   const [open, setOpen] = useState(false);
   const [formValues, setFormValues] = useState({
     title: "",
@@ -42,9 +42,14 @@ const ResearchForm = () => {
       if (formValues.to === "") {
         formValues.to = "present";
       }
-      await axios.put(`http://localhost:8000/api/students?email=${email}`, {
-        researchPapers: formValues,
-      });
+      await axios
+        .put(`http://localhost:8000/api/students?email=${email}`, {
+          researchPapers: formValues,
+        })
+        .then((res) => {
+          console.log(res.data);
+          setData(res.data);
+        });
       console.log(formValues);
 
       // Reset form values

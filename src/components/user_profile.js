@@ -59,9 +59,9 @@ function UserProfile() {
             margin: "10px 0",
           }}
         >
-          <UserProfileDetails tempData={data} />
+          <UserProfileDetails tempData={data} setData={setData} />
           <div style={{ width: "10px" }}></div>
-          <UserProfileWorks tempData={data} />
+          <UserProfileWorks tempData={data} setData={setData} />
         </div>
       )}
     </div>

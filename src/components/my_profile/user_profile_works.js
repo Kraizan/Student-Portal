@@ -8,7 +8,7 @@ import ExperienceForm from "./experience_form";
 import ProjectForm from "./project_form";
 import ResearchForm from "./research_form";
 
-function UserProfileWorks({ tempData }) {
+function UserProfileWorks({ tempData, setData }) {
   const [showAllExperiences, setShowAllExperiences] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [showAllPapers, setShowAllPapers] = useState(false);
@@ -26,7 +26,7 @@ function UserProfileWorks({ tempData }) {
             .map((data, index) => {
               return (
                 <div key={index}>
-                  <WorkExperienceCard data={data} />
+                  <WorkExperienceCard data={data} setData={setData} />
                 </div>
               );
             })}
@@ -36,7 +36,7 @@ function UserProfileWorks({ tempData }) {
               showAll={showAllExperiences}
               setShowAll={setShowAllExperiences}
             />
-            <ExperienceForm />
+            <ExperienceForm setData={setData} />
           </div>
         </CardContent>
       </Card>
@@ -48,7 +48,7 @@ function UserProfileWorks({ tempData }) {
             .map((data, index) => {
               return (
                 <div key={index}>
-                  <ProjectCard project={data} />
+                  <ProjectCard project={data} setData={setData} />
                 </div>
               );
             })}
@@ -58,7 +58,7 @@ function UserProfileWorks({ tempData }) {
               showAll={showAllProjects}
               setShowAll={setShowAllProjects}
             />
-            <ProjectForm />
+            <ProjectForm setData={setData} />
           </div>
         </CardContent>
       </Card>
@@ -70,7 +70,7 @@ function UserProfileWorks({ tempData }) {
             .map((data, index) => {
               return (
                 <div key={index}>
-                  <ResearchPaperCard paper={data} />
+                  <ResearchPaperCard paper={data} setData={setData} />
                 </div>
               );
             })}
@@ -81,7 +81,7 @@ function UserProfileWorks({ tempData }) {
               showAll={showAllPapers}
               setShowAll={setShowAllPapers}
             />
-            <ResearchForm />
+            <ResearchForm setData={setData} />
           </div>
         </CardContent>
       </Card>

@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import AddWorkButton from "./add_work_button";
 
-const ProjectForm = () => {
+const ProjectForm = ({ setData }) => {
   const [open, setOpen] = useState(false);
   const [formValues, setFormValues] = useState({
     title: "",
@@ -39,9 +39,14 @@ const ProjectForm = () => {
   const handleSubmit = async () => {
     try {
       const email = localStorage.getItem("user");
-      await axios.put(`http://localhost:8000/api/students?email=${email}`, {
-        projects: formValues,
-      });
+      await axios
+        .put(`http://localhost:8000/api/students?email=${email}`, {
+          projects: formValues,
+        })
+        .then((res) => {
+          console.log(res.data);
+          setData(res.data);
+        });
       console.log(formValues);
 
       // Reset form values

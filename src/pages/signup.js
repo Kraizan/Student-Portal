@@ -57,7 +57,7 @@ const SignUpPage = () => {
       method: "post",
       mode: "cors",
       maxBodyLength: Infinity,
-      url: "http://localhost:8000/api/auth/register",
+      url: "http://localhost:8000/api/auth/signup",
       headers: {
         "Content-Type": "application/json",
       },

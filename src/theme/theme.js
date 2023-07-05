@@ -18,6 +18,10 @@ const theme = createTheme({
       main: "#24a0ed",
       dark: "#0065a4",
     },
+    btnGreen: {
+      main: "#00b518",
+      dark: "#009113",
+    },
     text: {
       main: "#f5f5f5",
       dark: "#404040",

@@ -1,9 +1,17 @@
 const Student = require("../models/student");
 
 // Get all Students
-exports.getAllStudents = async (req, res) => {
+exports.getStudents = async (req, res) => {
   try {
-    const students = await Student.find();
+    const { email } = req.query;
+    let students;
+
+    if (email) {
+      students = await Student.find({ email });
+    } else {
+      students = await Student.find();
+    }
+
     res.json(students);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -19,21 +27,17 @@ exports.createStudent = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
-// Get Student
-exports.getStudent = async (req, res) => {
-  try {
-    const student = await Student.findById(req.params.id);
-    res.json(student);
-  } catch (err) {
-    res.status(404).json({ message: "Student not found" });
-  }
-};
 // Update Student
 exports.updateStudent = async (req, res) => {
   try {
-    const student = await Student.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const student = await Student.findOneAndUpdate(
+      { email: req.query.email },
+      { $push: req.body },
+      {
+        new: true,
+        omitUndefined: true,
+      }
+    );
     res.json(student);
   } catch (err) {
     res.status(400).json({ message: err.message });

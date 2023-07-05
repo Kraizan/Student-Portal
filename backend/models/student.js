@@ -15,8 +15,8 @@ const studentSchema = new mongoose.Schema({
   workingExperience: [
     {
       company: String,
-      from: Date,
-      to: Date,
+      from: String,
+      to: String,
       position: String,
       description: String,
     },
@@ -25,7 +25,7 @@ const studentSchema = new mongoose.Schema({
     {
       title: String,
       link: String,
-      startedOn: Date,
+      startedOn: String,
       description: String,
       techStack: [String],
     },
@@ -34,9 +34,9 @@ const studentSchema = new mongoose.Schema({
     {
       title: String,
       publisher: String,
-      publishedOn: Date,
+      publishedOn: String,
       abstract: String,
-      docLink: String,
+      link: String,
     },
   ],
 });

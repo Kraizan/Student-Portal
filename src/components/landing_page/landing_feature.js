@@ -1,7 +1,7 @@
 import { useTheme } from "@emotion/react";
 import React from "react";
 
-function LandingFeatures(props) {
+function LandingFeature(props) {
   const colorTheme = useTheme().palette;
   return (
     <div
@@ -31,4 +31,4 @@ function LandingFeatures(props) {
   );
 }
 
-export default LandingFeatures;
+export default LandingFeature;

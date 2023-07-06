@@ -10,8 +10,9 @@ import {
 import { Devices, GitHub, LinkedIn } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
 import HyperlinkButton from "./hyperlink_button";
+import DeleteWorkButton from "./delete_work_button";
 
-function UserProfileDetails({ tempData }) {
+function UserProfileDetails({ tempData, setData }) {
   const colorTheme = useTheme().palette;
 
   const openResume = () => {
@@ -89,7 +90,12 @@ function UserProfileDetails({ tempData }) {
         <Typography variant="h6">Other Links</Typography>
         <div>
           {tempData.hyperlinks.other.map((link, index) => {
-            return <HyperlinkButton key={index} link={link} />;
+            return (
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <HyperlinkButton key={index} link={link} setData={setData} />
+                <DeleteWorkButton link={link} setData={setData} />
+              </div>
+            );
           })}
         </div>
       </CardContent>

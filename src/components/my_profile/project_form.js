@@ -38,13 +38,13 @@ const ProjectForm = ({ setData }) => {
 
   const handleSubmit = async () => {
     try {
-      const email = localStorage.getItem("user");
+      const id = localStorage.getItem("user");
       await axios
-        .put(`http://localhost:8000/api/students?email=${email}`, {
+        .put(`http://localhost:8000/api/students/${id}`, {
           projects: formValues,
         })
         .then((res) => {
-          console.log(res.data);
+          
           setData(res.data);
         });
       console.log(formValues);

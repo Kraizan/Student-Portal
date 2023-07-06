@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 
-function HyperlinkButton({ link }) {
+function HyperlinkButton({ link, setData }) {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -17,6 +17,7 @@ function HyperlinkButton({ link }) {
           fontWeight: "bold",
           textTransform: "none",
           padding: "0",
+          overflowWrap: "anywhere",
         }}
         onMouseEnter={() => {
           setIsHovered(!isHovered);

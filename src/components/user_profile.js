@@ -11,28 +11,32 @@ function UserProfile() {
 
   const navigate = useNavigate();
 
+  const setSortedData = (data) => {
+    if (data.workingExperience)
+      data.workingExperience.sort(function (a, b) {
+        return new Date(b.from) - new Date(a.from);
+      });
+    if (data.projects)
+      data.projects.sort(function (a, b) {
+        return new Date(b.startedOn) - new Date(a.startedOn);
+      });
+    if (data.researchPapers)
+      data.researchPapers.sort(function (a, b) {
+        return new Date(b.publishedOn) - new Date(a.publishedOn);
+      });
+    setData(data);
+  };
+
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      console.log(user);
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/students?email=${user}`
+            `http://localhost:8000/api/students/${user}`
           );
-          const data = response.data[0];
-          console.log(data);
-          setData(data);
-
-          data.workingExperience.sort(function (a, b) {
-            return new Date(b.from) - new Date(a.from);
-          });
-          data.projects.sort(function (a, b) {
-            return new Date(b.startedOn) - new Date(a.startedOn);
-          });
-          data.researchPapers.sort(function (a, b) {
-            return new Date(b.publishedOn) - new Date(a.publishedOn);
-          });
+          const data = response.data;
+          setSortedData(data);
 
           setLoading(false);
         } catch (error) {
@@ -59,9 +63,9 @@ function UserProfile() {
             margin: "10px 0",
           }}
         >
-          <UserProfileDetails tempData={data} setData={setData} />
+          <UserProfileDetails tempData={data} setData={setSortedData} />
           <div style={{ width: "10px" }}></div>
-          <UserProfileWorks tempData={data} setData={setData} />
+          <UserProfileWorks tempData={data} setData={setSortedData} />
         </div>
       )}
     </div>

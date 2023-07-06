@@ -22,7 +22,7 @@ exports.signup = async (req, res) => {
     const user = new User({ email, password: hashedPassword });
     await user.save();
 
-    res.status(201).json({ message: "User signed up successfully" });
+    res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });
   }
@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
     // Generate JWT token
     const token = jwt.sign({ userId: user._id }, config.JWT_SECRET);
 
-    res.status(200).json({ token });
+    res.status(200).json(user._id);
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });
   }

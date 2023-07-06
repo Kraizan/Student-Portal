@@ -53,7 +53,7 @@ const SignUpPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let config = {
+    let configAuth = {
       method: "post",
       mode: "cors",
       maxBodyLength: Infinity,
@@ -64,14 +64,31 @@ const SignUpPage = () => {
       data: { email: email, password: password },
     };
 
-    axios
-      .request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
+    const response = await axios.request(configAuth).catch((error) => {
+      console.log(error);
+    });
+
+    const userId = response.data._id;
+    console.log(userId);
+
+    let configStudent = {
+      method: "post",
+      mode: "cors",
+      maxBodyLength: Infinity,
+      url: "http://localhost:8000/api/students/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: { email: email, _id: userId },
+    };
+    console.log(configStudent.data._id);
+    await axios
+      .request(configStudent)
+      .then((res) => {
         navigate("/login");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
 

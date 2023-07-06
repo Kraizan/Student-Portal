@@ -38,19 +38,17 @@ const ResearchForm = ({ setData }) => {
 
   const handleSubmit = async () => {
     try {
-      const email = localStorage.getItem("user");
+      const id = localStorage.getItem("user");
       if (formValues.to === "") {
         formValues.to = "present";
       }
       await axios
-        .put(`http://localhost:8000/api/students?email=${email}`, {
+        .put(`http://localhost:8000/api/students/${id}`, {
           researchPapers: formValues,
         })
         .then((res) => {
-          console.log(res.data);
           setData(res.data);
         });
-      console.log(formValues);
 
       // Reset form values
       setFormValues({

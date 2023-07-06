@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ProjectCard from "./project_card";
-import WorkExperienceCard from "./work_experience_card";
-import ResearchPaperCard from "./research_paper_card";
+import WorkExperienceCard from "./experience_card";
+import ResearchPaperCard from "./research_card";
 import { Card, CardContent, CardHeader } from "@mui/material";
 import ToggleWorksButton from "./toggle_works_button";
 import ExperienceForm from "./experience_form";

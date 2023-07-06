@@ -56,9 +56,8 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
     axios
       .request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-        localStorage.setItem("user", email);
+      .then((res) => {
+        localStorage.setItem("user", res.data);
         setIsLoggedIn(true);
         navigate("/home");
       })

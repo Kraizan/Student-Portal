@@ -7,7 +7,7 @@ import TextInputField from "../components/input_field";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 
-const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
+const LoginPage = ({ setIsLoggedIn }) => {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
     axios
       .request(config)
       .then((res) => {
-        localStorage.setItem("user", res.data);
+        localStorage.setItem("user", res.data._id);
         setIsLoggedIn(true);
         navigate("/home");
       })
@@ -93,6 +93,7 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
               fontSize: "2.5rem",
               fontWeight: "700",
               margin: "3% auto",
+              color: colorTheme.primary.main,
             }}
           >
             Log Back In
@@ -123,7 +124,7 @@ const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
           >
             Login
           </Button>
-          <div style={{ fontSize: "1.1rem" }}>
+          <div style={{ fontSize: "1.1rem", color: colorTheme.primary.main }}>
             Don't have an account?{" "}
             <Link
               to="/signup"

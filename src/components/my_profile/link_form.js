@@ -8,17 +8,11 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
-import AddWorkButton from "./add_work_button";
+import AddLinkButton from "./add_link_button";
 
-const ProjectForm = ({ setData }) => {
+const LinkForm = ({ setData }) => {
   const [open, setOpen] = useState(false);
-  const [formValues, setFormValues] = useState({
-    title: "",
-    link: "",
-    startedOn: "",
-    description: "",
-    techStack: [],
-  });
+  const [formValues, setFormValues] = useState({ title: "", link: "" });
 
   const handleOpen = () => {
     setOpen(true);
@@ -30,9 +24,9 @@ const ProjectForm = ({ setData }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues((prevformValues) => ({
-      ...prevformValues,
-      [name]: name === "techStack" ? value.split(",") : value,
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
     }));
   };
 
@@ -41,22 +35,14 @@ const ProjectForm = ({ setData }) => {
       const id = localStorage.getItem("user");
       await axios
         .put(`http://localhost:8000/api/students/${id}/add`, {
-          projects: formValues,
+          hyperlinks: formValues,
         })
         .then((res) => {
           setData(res.data);
         });
-      console.log(formValues);
 
       // Reset form values
-      setFormValues({
-        title: "",
-        link: "",
-        startedOn: "",
-        description: "",
-        techStack: [],
-      });
-
+      setFormValues({ title: "", link: "" });
       setOpen(false);
     } catch (error) {
       console.log(error);
@@ -65,46 +51,24 @@ const ProjectForm = ({ setData }) => {
 
   return (
     <div>
-      <AddWorkButton onClick={handleOpen} />
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Project</DialogTitle>
+      <AddLinkButton onClick={handleOpen} />
+      <Dialog open={open} onClose={handleClose} fullWidth>
+        <DialogTitle>Add New Link</DialogTitle>
         <DialogContent>
           <TextField
-            label="Title"
             name="title"
+            label="Title"
             value={formValues.title}
             onChange={handleChange}
             fullWidth
             margin="normal"
           />
+        </DialogContent>
+        <DialogContent>
           <TextField
-            label="Link"
             name="link"
+            label="Link"
             value={formValues.link}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Started On"
-            name="startedOn"
-            value={formValues.startedOn}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Description"
-            name="description"
-            value={formValues.description}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="Tech Stack"
-            name="techStack"
-            value={formValues.techStack}
             onChange={handleChange}
             fullWidth
             margin="normal"
@@ -128,4 +92,4 @@ const ProjectForm = ({ setData }) => {
   );
 };
 
-export default ProjectForm;
+export default LinkForm;

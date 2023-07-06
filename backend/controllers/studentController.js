@@ -28,6 +28,9 @@ exports.createStudent = async (req, res) => {
       contact,
       profileImage,
       resume,
+      portfolioWebsite,
+      linkedIn,
+      github,
       hyperlinks,
       workingExperience,
       projects,
@@ -41,12 +44,10 @@ exports.createStudent = async (req, res) => {
       contact: contact || "",
       profileImage: profileImage || "",
       resume: resume || "",
-      hyperlinks: hyperlinks || {
-        portfolioWebsite: "",
-        linkedIn: "",
-        github: "",
-        other: [],
-      },
+      portfolioWebsite: portfolioWebsite || "",
+      linkedIn: linkedIn || "",
+      github: github || "",
+      hyperlinks: hyperlinks || [],
       workingExperience: workingExperience || [],
       projects: projects || [],
       researchPapers: researchPapers || [],
@@ -59,7 +60,7 @@ exports.createStudent = async (req, res) => {
   }
 };
 // Update Student
-exports.updateStudent = async (req, res) => {
+exports.updateStudentAdd = async (req, res) => {
   try {
     const student = await Student.findByIdAndUpdate(
       req.params.id,
@@ -74,47 +75,58 @@ exports.updateStudent = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+exports.updateStudentReplace = async (req, res) => {
+  try {
+    const student = await Student.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      {
+        new: true,
+        omitUndefined: true,
+      }
+    );
+    res.status(201).json(student);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 // Delete Student
 exports.deleteStudent = async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
-    const link = req.query.link;
     const workId = req.query.workId;
 
-    if (link) {
-      const index = student.hyperlinks.other.findIndex(
-        (hyperlink) => hyperlink.toString() === link
-      );
+    const workIndex = student.workingExperience.findIndex(
+      (work) => work._id.toString() === workId
+    );
 
-      if (index !== -1) {
-        student.hyperlinks.other.splice(index, 1);
-        await student.save();
-      }
-    } else {
-      const workIndex = student.workingExperience.findIndex(
-        (work) => work._id.toString() === workId
-      );
+    if (workIndex !== -1) {
+      student.workingExperience.splice(workIndex, 1);
+      await student.save();
+    }
 
-      if (workIndex !== -1) {
-        student.workingExperience.splice(workIndex, 1);
-        await student.save();
-      }
+    const projectIndex = student.projects.findIndex(
+      (project) => project._id.toString() === workId
+    );
+    if (projectIndex !== -1) {
+      student.projects.splice(projectIndex, 1);
+      await student.save();
+    }
 
-      const projectIndex = student.projects.findIndex(
-        (project) => project._id.toString() === workId
-      );
-      if (projectIndex !== -1) {
-        student.projects.splice(projectIndex, 1);
-        await student.save();
-      }
+    const paperIndex = student.researchPapers.findIndex(
+      (paper) => paper._id.toString() === workId
+    );
+    if (paperIndex !== -1) {
+      student.researchPapers.splice(paperIndex, 1);
+      await student.save();
+    }
 
-      const paperIndex = student.researchPapers.findIndex(
-        (paper) => paper._id.toString() === workId
-      );
-      if (paperIndex !== -1) {
-        student.researchPapers.splice(paperIndex, 1);
-        await student.save();
-      }
+    const linkIndex = student.hyperlinks.findIndex(
+      (link) => link._id.toString() === workId
+    );
+    if (linkIndex !== -1) {
+      student.hyperlinks.splice(linkIndex, 1);
+      await student.save();
     }
 
     res.status(201).json(student);

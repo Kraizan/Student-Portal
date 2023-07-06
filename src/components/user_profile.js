@@ -25,15 +25,16 @@ function UserProfile() {
         return new Date(b.publishedOn) - new Date(a.publishedOn);
       });
     setData(data);
+    localStorage.setItem("profile", data.profileImage);
   };
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
+    const id = localStorage.getItem("user");
+    if (id) {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/students/${user}`
+            `http://localhost:8000/api/students/${id}`
           );
           const data = response.data;
           setSortedData(data);

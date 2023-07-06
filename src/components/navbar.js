@@ -9,13 +9,15 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
+  const profile = localStorage.getItem("profile");
+
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
       console.log(user);
       setIsLoggedIn(true);
     }
-  }, []);
+  }, [profile]);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -71,6 +73,7 @@ function Navbar() {
         {isLoggedIn ? (
           <Button color="inherit">
             <Avatar
+              src={profile}
               onClick={handleMenuOpen}
               sx={{ bgcolor: "grey", width: "55px", height: "55px" }}
             ></Avatar>
@@ -79,10 +82,10 @@ function Navbar() {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={() => handleMenuClick("/my-profile")}>
+              <MenuItem onClick={() => handleMenuClick("/student-profile")}>
                 My Profile
               </MenuItem>
-              <MenuItem onClick={() => handleMenuClick("/settings")}>
+              <MenuItem onClick={() => handleMenuClick("/edit-profile")}>
                 Settings
               </MenuItem>
               <MenuItem onClick={handleLogOut}>Log out</MenuItem>

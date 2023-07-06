@@ -119,6 +119,7 @@ const SignUpPage = () => {
               fontSize: "2.5rem",
               fontWeight: "700",
               margin: "3% auto",
+              color: colorTheme.primary.main,
             }}
           >
             Create Your Account
@@ -163,7 +164,7 @@ const SignUpPage = () => {
           >
             Sign Up
           </Button>
-          <div style={{ fontSize: "1.1rem" }}>
+          <div style={{ fontSize: "1.1rem", color: colorTheme.primary.main }}>
             Already have an account?{" "}
             <Link
               to="/login"

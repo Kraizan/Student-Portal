@@ -7,11 +7,11 @@ function AddWorkButton({ onClick }) {
   const colorTheme = useTheme().palette;
   return (
     <Button
-      variant="contained"
+      variant="outlined"
       color="btnColor2"
       size="large"
       style={{
-        color: colorTheme.btnColor.main,
+        color: colorTheme.btnColor.dark,
         borderRadius: "50px",
         fontWeight: "bold",
         textTransform: "none",

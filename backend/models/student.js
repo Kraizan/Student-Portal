@@ -7,12 +7,15 @@ const studentSchema = new mongoose.Schema({
   contact: String,
   profileImage: String,
   resume: String,
-  hyperlinks: {
-    portfolioWebsite: String,
-    linkedIn: String,
-    github: String,
-    other: [String],
-  },
+  portfolioWebsite: String,
+  linkedIn: String,
+  github: String,
+  hyperlinks: [
+    {
+      title: String,
+      link: String,
+    },
+  ],
   workingExperience: [
     {
       company: String,

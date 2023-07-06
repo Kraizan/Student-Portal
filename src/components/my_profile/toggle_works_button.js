@@ -1,10 +1,9 @@
 import { useTheme } from "@emotion/react";
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
 function ToggleWorksButton({ data, showAll, setShowAll }) {
   const colorTheme = useTheme().palette;
-  const [isHovered, setIsHovered] = useState(false);
 
   const toggleShowAll = () => {
     setShowAll(!showAll);
@@ -15,21 +14,13 @@ function ToggleWorksButton({ data, showAll, setShowAll }) {
       {data.length > 1 && (
         <Button
           variant="contained"
-          color="btnColor"
+          color="btnColor2"
           size="large"
           style={{
-            color: isHovered
-              ? colorTheme.btnColor.main
-              : colorTheme.btnColor.dark,
+            color: colorTheme.btnColor.main,
             borderRadius: "50px",
             fontWeight: "bold",
             textTransform: "none",
-          }}
-          onMouseEnter={() => {
-            setIsHovered(!isHovered);
-          }}
-          onMouseLeave={() => {
-            setIsHovered(!isHovered);
           }}
           onClick={toggleShowAll}
         >

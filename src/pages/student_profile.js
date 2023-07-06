@@ -3,7 +3,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import UserProfile from "../components/user_profile";
 
-function MyProfilePage() {
+function StudentProfilePage() {
   return (
     <div>
       <Navbar />
@@ -13,4 +13,4 @@ function MyProfilePage() {
   );
 }
 
-export default MyProfilePage;
+export default StudentProfilePage;

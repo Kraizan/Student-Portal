@@ -43,7 +43,7 @@ const ExperienceForm = ({ setData }) => {
         formValues.to = "present";
       }
       await axios
-        .put(`http://localhost:8000/api/students/${id}`, {
+        .put(`http://localhost:8000/api/students/${id}/add`, {
           workingExperience: formValues,
         })
         .then((res) => {

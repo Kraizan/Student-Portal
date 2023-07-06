@@ -18,6 +18,7 @@ function HyperlinkButton({ link, setData }) {
           textTransform: "none",
           padding: "0",
           overflowWrap: "anywhere",
+          minWidth: "0",
         }}
         onMouseEnter={() => {
           setIsHovered(!isHovered);

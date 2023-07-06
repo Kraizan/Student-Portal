@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/home";
 import SignUpPage from "./pages/signup";
 import LoginPage from "./pages/login";
-import MyProfilePage from "./pages/my_profile";
+import EditProfilePage from "./pages/edit_profile";
+import StudentProfilePage from "./pages/student_profile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,21 +24,19 @@ function App() {
           <Route
             exact
             path="/login"
-            element={
-              <LoginPage
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-            }
+            element={<LoginPage setIsLoggedIn={setIsLoggedIn} />}
+          ></Route>
+          <Route exact path="/home" element={<HomePage />}></Route>
+          <Route
+            exact
+            path="/student-profile"
+            element={<StudentProfilePage />}
           ></Route>
           <Route
             exact
-            path="/home"
-            element={
-              <HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-            }
+            path="/edit-profile"
+            element={<EditProfilePage />}
           ></Route>
-          <Route exact path="/my-profile" element={<MyProfilePage />}></Route>
         </Routes>
       </Router>
     </ThemeProvider>

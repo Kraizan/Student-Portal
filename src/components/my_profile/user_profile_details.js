@@ -11,6 +11,7 @@ import { Devices, GitHub, LinkedIn } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
 import HyperlinkButton from "./hyperlink_button";
 import DeleteWorkButton from "./delete_work_button";
+import LinkForm from "./link_form";
 
 function UserProfileDetails({ tempData, setData }) {
   const colorTheme = useTheme().palette;
@@ -70,33 +71,45 @@ function UserProfileDetails({ tempData, setData }) {
           <Devices style={{ color: "black", marginRight: "5px" }} />
           <Typography variant="h6">Portfolio</Typography>
         </div>
-        <HyperlinkButton link={tempData.hyperlinks.portfolioWebsite} />
+        <HyperlinkButton link={tempData.portfolioWebsite} />
       </CardContent>
       <CardContent>
         <div style={{ display: "flex", alignItems: "center" }}>
           <LinkedIn style={{ color: "black", marginRight: "5px" }} />
           <Typography variant="h6">LinkedIn</Typography>
         </div>
-        <HyperlinkButton link={tempData.hyperlinks.linkedIn} />
+        <HyperlinkButton link={tempData.linkedIn} />
       </CardContent>
       <CardContent>
         <div style={{ display: "flex", alignItems: "center" }}>
           <GitHub style={{ color: "black", marginRight: "5px" }} />
           <Typography variant="h6">GitHub</Typography>
         </div>
-        <HyperlinkButton link={tempData.hyperlinks.github} />
+        <HyperlinkButton link={tempData.github} />
       </CardContent>
       <CardContent>
         <Typography variant="h6">Other Links</Typography>
+      </CardContent>
+      {tempData.hyperlinks.map((hyperlink, index) => {
+        return (
+          <CardContent key={index}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="h6">{hyperlink.title}</Typography>
+              <DeleteWorkButton data={hyperlink} setData={setData} />
+            </div>
+            <HyperlinkButton link={hyperlink.link} />
+          </CardContent>
+        );
+      })}
+      <CardContent>
         <div>
-          {tempData.hyperlinks.other.map((link, index) => {
-            return (
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <HyperlinkButton key={index} link={link} setData={setData} />
-                <DeleteWorkButton link={link} setData={setData} />
-              </div>
-            );
-          })}
+          <LinkForm setData={setData} />
         </div>
       </CardContent>
     </Card>

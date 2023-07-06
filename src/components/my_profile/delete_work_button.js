@@ -3,23 +3,16 @@ import { IconButton } from "@mui/material";
 import axios from "axios";
 import React from "react";
 
-function DeleteWorkButton({ data, link, setData }) {
+function DeleteWorkButton({ data, setData }) {
   const handleDelete = async () => {
     const id = localStorage.getItem("user");
+    console.log(data);
     try {
-      if (link) {
-        await axios
-          .delete(`http://localhost:8000/api/students/${id}?link=${link}`)
-          .then((res) => {
-            setData(res.data);
-          });
-      } else {
-        await axios
-          .delete(`http://localhost:8000/api/students/${id}?workId=${data._id}`)
-          .then((res) => {
-            setData(res.data);
-          });
-      }
+      await axios
+        .delete(`http://localhost:8000/api/students/${id}?workId=${data._id}`)
+        .then((res) => {
+          setData(res.data);
+        });
     } catch (error) {
       console.log(error);
     }

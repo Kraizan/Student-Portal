@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 
-function HyperlinkButton({ link, setData }) {
+function HyperlinkButton({ link }) {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -12,8 +12,8 @@ function HyperlinkButton({ link, setData }) {
         size="large"
         style={{
           color: isHovered
-            ? colorTheme.btnColor2.dark
-            : colorTheme.btnColor2.main,
+            ? colorTheme.secondary.dark
+            : colorTheme.primary.main,
           fontWeight: "bold",
           textTransform: "none",
           padding: "0",

@@ -14,7 +14,7 @@ function ToggleWorksButton({ data, showAll, setShowAll }) {
       {data.length > 1 && (
         <Button
           variant="contained"
-          color="btnColor2"
+          color="info"
           size="large"
           style={{
             color: colorTheme.btnColor.main,

@@ -24,8 +24,8 @@ const SignUpPage = () => {
     height: "50px",
     fontSize: "1.2rem",
     fontWeight: "500",
-    color: isHovered ? colorTheme.primary.main : colorTheme.primary.dark,
-    borderColor: colorTheme.primary.main,
+    color: isHovered ? colorTheme.text.main : colorTheme.text.dark,
+    borderColor: colorTheme.text.main,
     margin: "20px 0",
   };
 
@@ -119,7 +119,7 @@ const SignUpPage = () => {
               fontSize: "2.5rem",
               fontWeight: "700",
               margin: "3% auto",
-              color: colorTheme.primary.main,
+              color: colorTheme.text.main,
             }}
           >
             Create Your Account
@@ -164,7 +164,7 @@ const SignUpPage = () => {
           >
             Sign Up
           </Button>
-          <div style={{ fontSize: "1.1rem", color: colorTheme.primary.main }}>
+          <div style={{ fontSize: "1.1rem", color: colorTheme.text.main }}>
             Already have an account?{" "}
             <Link
               to="/login"

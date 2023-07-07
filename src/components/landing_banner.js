@@ -4,7 +4,7 @@ import { Button, useTheme } from "@mui/material";
 import LandingFeatures from "./landing_page/landing_feature";
 import { Link } from "react-router-dom";
 
-function LandingPage() {
+function LandingBanner() {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -34,7 +34,7 @@ function LandingPage() {
         style={{
           fontSize: "3.5em",
           fontWeight: "500",
-          color: colorTheme.primary.main,
+          color: colorTheme.text.main,
           textAlign: "center",
         }}
       >
@@ -49,9 +49,7 @@ function LandingPage() {
           style={{
             height: "60px",
             width: "200px",
-            color: isHovered
-              ? colorTheme.primary.main
-              : colorTheme.primary.dark,
+            color: isHovered ? colorTheme.text.main : colorTheme.text.dark,
             borderRadius: "50px",
             fontSize: "18px",
             fontWeight: "600",
@@ -95,4 +93,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default LandingBanner;

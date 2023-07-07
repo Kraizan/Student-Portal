@@ -82,9 +82,7 @@ function ProjectCard({ project, setData }) {
           color="btnColor"
           size="large"
           style={{
-            color: isHovered
-              ? colorTheme.primary.main
-              : colorTheme.primary.dark,
+            color: isHovered ? colorTheme.text.main : colorTheme.text.dark,
             borderRadius: "50px",
             fontWeight: "bold",
             textTransform: "none",

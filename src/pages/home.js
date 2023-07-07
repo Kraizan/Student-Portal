@@ -1,13 +1,13 @@
-import { React } from "react";
+import React from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import LandingPage from "../components/landing";
+import ExploreSection from "../components/explore";
 
 function HomePage() {
   return (
-    <div style={{ width: "100%" }}>
+    <div>
       <Navbar />
-      <LandingPage />
+      <ExploreSection />
       <Footer />
     </div>
   );

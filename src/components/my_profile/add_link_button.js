@@ -6,7 +6,7 @@ function AddLinkButton({ onClick }) {
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
       <Button
-        color="btnColor2"
+        color="primary"
         variant="outlined"
         style={{ borderRadius: "50px", width: "100%" }}
         onClick={onClick}

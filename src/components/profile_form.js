@@ -137,10 +137,10 @@ const ProfileForm = ({ student }) => {
             <Button
               type="submit"
               variant="contained"
-              color="btnColor2"
+              color="primary"
               size="large"
               style={{
-                color: colorTheme.btnColor.main,
+                color: colorTheme.text.main,
                 borderRadius: "50px",
                 fontWeight: "bold",
                 textTransform: "none",

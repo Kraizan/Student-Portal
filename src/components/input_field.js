@@ -6,9 +6,9 @@ function TextInputField(props) {
   return (
     <TextField
       label={props.label}
-      InputLabelProps={{ style: { color: colorTheme.primary.main } }}
+      InputLabelProps={{ style: { color: colorTheme.text.main } }}
       inputProps={{
-        style: { color: colorTheme.primary.main },
+        style: { color: colorTheme.text.main },
         draggable: "false",
         placeholder: props.placeholder,
       }}

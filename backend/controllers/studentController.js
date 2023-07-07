@@ -10,9 +10,8 @@ exports.getStudents = async (req, res) => {
       }
       res.json(student);
     } else {
-      // If no ID is provided, retrieve all students
       const students = await Student.find();
-      res.json(students);
+      res.status(200).json(students);
     }
   } catch (err) {
     res.status(400).json({ message: err.message });

@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const colorTheme = useTheme().palette;
-  const [isHovered, setIsHovered] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
@@ -14,20 +13,11 @@ function Navbar() {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      console.log(user);
       setIsLoggedIn(true);
     }
   }, [profile]);
 
   const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -59,23 +49,34 @@ function Navbar() {
         borderBottom: "2px solid lightgrey",
       }}
     >
-      <div
+      <Link
+        to="/home"
         style={{
+          textDecoration: "none",
           fontSize: "2rem",
           letterSpacing: "0.04em",
-          color: colorTheme.secondary.main,
+          color: colorTheme.text.dark,
           fontWeight: "500",
         }}
       >
         Student Portal
-      </div>
+      </Link>
       <div>
         {isLoggedIn ? (
-          <Button color="inherit">
+          <Button
+            color="inherit"
+            style={{
+              borderRadius: "50px",
+            }}
+          >
             <Avatar
               src={profile}
               onClick={handleMenuOpen}
-              sx={{ bgcolor: "grey", width: "55px", height: "55px" }}
+              sx={{
+                bgcolor: "grey",
+                width: "55px",
+                height: "55px",
+              }}
             ></Avatar>
             <Menu
               anchorEl={anchorEl}
@@ -95,20 +96,15 @@ function Navbar() {
           <Link to="/login">
             <Button
               variant="contained"
-              color="btnColor"
+              color="info"
               style={{
-                backgroundColor: isHovered
-                  ? colorTheme.btnColor2.dark
-                  : colorTheme.btnColor2.main,
                 height: "50px",
                 width: "120px",
-                color: colorTheme.primary.main,
+                color: colorTheme.text.main,
                 borderRadius: "30px",
                 fontSize: "15px",
                 fontWeight: "600",
               }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
             >
               Sign In
             </Button>

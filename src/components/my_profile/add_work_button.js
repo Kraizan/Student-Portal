@@ -8,7 +8,7 @@ function AddWorkButton({ onClick }) {
   return (
     <Button
       variant="outlined"
-      color="btnColor2"
+      color="primary"
       size="large"
       style={{
         color: colorTheme.btnColor.dark,

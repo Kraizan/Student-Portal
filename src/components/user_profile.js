@@ -14,15 +14,15 @@ function UserProfile() {
   const setSortedData = (data) => {
     if (data.workingExperience)
       data.workingExperience.sort(function (a, b) {
-        return new Date(b.from) - new Date(a.from);
+        return new Date(a.from) - new Date(b.from);
       });
     if (data.projects)
       data.projects.sort(function (a, b) {
-        return new Date(b.startedOn) - new Date(a.startedOn);
+        return new Date(a.startedOn) - new Date(b.startedOn);
       });
     if (data.researchPapers)
       data.researchPapers.sort(function (a, b) {
-        return new Date(b.publishedOn) - new Date(a.publishedOn);
+        return new Date(a.publishedOn) - new Date(b.publishedOn);
       });
     setData(data);
     localStorage.setItem("profile", data.profileImage);

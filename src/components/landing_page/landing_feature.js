@@ -11,7 +11,7 @@ function LandingFeature(props) {
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
-        color: colorTheme.primary.main,
+        color: colorTheme.text.main,
       }}
     >
       <div style={{ width: "auto", textAlign: "center" }}>

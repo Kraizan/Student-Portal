@@ -48,7 +48,11 @@ function UserProfileWorks({ tempData, setData }) {
             .map((data, index) => {
               return (
                 <div key={index}>
-                  <ProjectCard project={data} setData={setData} />
+                  <ProjectCard
+                    project={data}
+                    setData={setData}
+                    editable={true}
+                  />
                 </div>
               );
             })}

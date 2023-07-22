@@ -40,7 +40,7 @@ const LoginPage = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     let config = {
@@ -54,15 +54,24 @@ const LoginPage = () => {
       data: { email: email, password: password },
     };
 
-    axios
-      .request(config)
-      .then((res) => {
-        localStorage.setItem("user", res.data._id);
-        navigate("/home");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const res = await axios.request(config);
+    localStorage.setItem("user", res.data._id);
+    localStorage.setItem("type", res.data.type);
+
+    let response;
+    if (res.data.type === "student") {
+      response = await axios.get(
+        `http://localhost:8000/api/students/student/${res.data._id}`
+      );
+    } else if (res.data.type === "faculty") {
+      response = await axios.get(
+        `http://localhost:8000/api/faculties/faculty/${res.data._id}`
+      );
+    }
+    const data = response.data;
+    localStorage.setItem("profile", data.profileImage);
+
+    navigate("/home");
   };
 
   return (

@@ -6,6 +6,7 @@ import Footer from "../components/footer";
 import TextInputField from "../components/input_field";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
+import { MenuItem, TextField } from "@mui/material";
 
 const SignUpPage = () => {
   const colorTheme = useTheme().palette;
@@ -33,6 +34,7 @@ const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
 
   const handleFullNameChange = (event) => {
     setFullName(event.target.value);
@@ -40,6 +42,10 @@ const SignUpPage = () => {
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
+  };
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -51,6 +57,7 @@ const SignUpPage = () => {
   };
 
   const handleSubmit = async (event) => {
+    console.log(fullName, email, password, selectedOption);
     event.preventDefault();
 
     let configAuth = {
@@ -61,7 +68,7 @@ const SignUpPage = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      data: { email: email, password: password },
+      data: { email: email, password: password, type: selectedOption },
     };
 
     const response = await axios.request(configAuth).catch((error) => {
@@ -69,21 +76,22 @@ const SignUpPage = () => {
     });
 
     const userId = response.data._id;
-    console.log(userId);
 
-    let configStudent = {
+    let URL = "http://localhost:8000/api/";
+    const type = selectedOption === "student" ? "students" : "faculties";
+    URL += type;
+    let config = {
       method: "post",
       mode: "cors",
       maxBodyLength: Infinity,
-      url: "http://localhost:8000/api/students/",
+      url: URL,
       headers: {
         "Content-Type": "application/json",
       },
-      data: { email: email, _id: userId },
+      data: { _id: userId, fullName: fullName, email: email },
     };
-    console.log(configStudent.data._id);
     await axios
-      .request(configStudent)
+      .request(config)
       .then((res) => {
         navigate("/login");
       })
@@ -111,14 +119,14 @@ const SignUpPage = () => {
           style={{
             width: "40%",
             textAlign: "center",
-            marginTop: "4%",
+            marginTop: "2%",
           }}
         >
           <div
             style={{
               fontSize: "2.5rem",
               fontWeight: "700",
-              margin: "3% auto",
+              margin: "2% auto",
               color: colorTheme.text.main,
             }}
           >
@@ -138,6 +146,30 @@ const SignUpPage = () => {
             value={email}
             onChange={handleEmailChange}
           />
+          <TextField
+            id="select"
+            label="Profile type *"
+            variant="filled"
+            value={selectedOption}
+            onChange={handleOptionChange}
+            select
+            fullWidth
+            SelectProps={{
+              style: { color: colorTheme.text.main }, // Apply custom styling for white color
+            }}
+            InputLabelProps={{
+              style: { color: colorTheme.text.main }, // Apply custom styling for white color
+            }}
+            style={{
+              textAlign: "left",
+              color: colorTheme.text.main,
+              marginTop: "20px",
+              border: "1px solid lightgrey",
+            }}
+          >
+            <MenuItem value="student">Student</MenuItem>
+            <MenuItem value="faculty">Faculty</MenuItem>
+          </TextField>
           <TextInputField
             label="Password"
             type="password"

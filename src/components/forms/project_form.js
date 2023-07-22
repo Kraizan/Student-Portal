@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
-import AddWorkButton from "./add_work_button";
+import AddWorkButton from "../buttons/add_work_button";
 
 const ProjectForm = ({ setData }) => {
   const [open, setOpen] = useState(false);
@@ -39,8 +39,11 @@ const ProjectForm = ({ setData }) => {
   const handleSubmit = async () => {
     try {
       const id = localStorage.getItem("user");
+      const type =
+        localStorage.getItem("type") === "student" ? "students" : "faculties";
+      const URL = `http://localhost:8000/api/${type}/${id}/add`;
       await axios
-        .put(`http://localhost:8000/api/students/${id}/add`, {
+        .put(URL, {
           projects: formValues,
         })
         .then((res) => {

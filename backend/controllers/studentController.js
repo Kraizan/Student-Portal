@@ -3,20 +3,58 @@ const Student = require("../models/student");
 // Get all Students
 exports.getStudents = async (req, res) => {
   try {
-    if (req.params.id) {
-      const student = await Student.findById(req.params.id);
-      if (!student) {
-        return res.status(404).json({ message: "Student not found" });
-      }
-      res.json(student);
-    } else {
-      const students = await Student.find();
-      res.status(200).json(students);
-    }
+    const students = await Student.find();
+    res.status(200).json(students);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
+// Get a specific student
+exports.getStudent = async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.id);
+    if (!student) {
+      return res
+        .status(404)
+        .json({ success: false, error: "Student not found" });
+    }
+    res.status(200).json(student);
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+};
+
+// Get all students projects
+exports.getStudentProjects = async (req, res) => {
+  try {
+    const students = await Student.find();
+    const projects = [];
+    for (var i = 0; i < students.length; i++) {
+      for (var j = 0; j < students[i].projects.length; j++) {
+        projects.push(students[i].projects[j]);
+      }
+    }
+    res.status(200).json(projects);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+// Get all students papers
+exports.getStudentPapers = async (req, res) => {
+  try {
+    const students = await Student.find();
+    const researchPapers = [];
+    for (var i = 0; i < students.length; i++) {
+      for (var j = 0; j < students[i].researchPapers.length; j++) {
+        researchPapers.push(students[i].researchPapers[j]);
+      }
+    }
+    res.status(200).json(researchPapers);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
 // Create Student
 exports.createStudent = async (req, res) => {
   try {

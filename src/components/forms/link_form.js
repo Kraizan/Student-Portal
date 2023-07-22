@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
-import AddLinkButton from "./add_link_button";
+import AddLinkButton from "../buttons/add_link_button";
 
 const LinkForm = ({ setData }) => {
   const [open, setOpen] = useState(false);
@@ -33,8 +33,11 @@ const LinkForm = ({ setData }) => {
   const handleSubmit = async () => {
     try {
       const id = localStorage.getItem("user");
+      const type =
+        localStorage.getItem("type") === "student" ? "students" : "faculties";
+      const URL = `http://localhost:8000/api/${type}/${id}/add`;
       await axios
-        .put(`http://localhost:8000/api/students/${id}/add`, {
+        .put(URL, {
           hyperlinks: formValues,
         })
         .then((res) => {

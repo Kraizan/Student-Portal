@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import UserProfileDetails from "./my_profile/user_profile_details";
-import UserProfileWorks from "./my_profile/user_profile_works";
+import UserProfileDetails from "./user_profile_details";
+import UserProfileWorks from "./user_profile_works";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -34,11 +34,10 @@ function UserProfile() {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/students/${id}`
+            `http://localhost:8000/api/students/student/${id}`
           );
           const data = response.data;
           setSortedData(data);
-
           setLoading(false);
         } catch (error) {
           console.error(error);

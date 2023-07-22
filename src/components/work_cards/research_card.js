@@ -1,9 +1,9 @@
 import { useTheme } from "@emotion/react";
 import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";
-import DeleteWorkButton from "./delete_work_button";
+import DeleteWorkButton from "../buttons/delete_work_button";
 
-function ProjectCard({ project, setData }) {
+function ResearchPaperCard({ paper, setData }) {
   const colorTheme = useTheme().palette;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -25,12 +25,13 @@ function ProjectCard({ project, setData }) {
     >
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6" component="div" gutterBottom>
-          {project.title}
+          {paper.title}
         </Typography>
         <div>
-          <DeleteWorkButton data={project} setData={setData} />
+          <DeleteWorkButton data={paper} setData={setData} />
         </div>
       </div>
+
       <div
         style={{
           display: "flex",
@@ -41,23 +42,9 @@ function ProjectCard({ project, setData }) {
           variant="subtitle1"
           gutterBottom
           color="GrayText"
-          style={{ display: "flex", width: "70%" }}
+          style={{ width: "70%", overflowWrap: "break-word", display: "flex" }}
         >
-          Techstack Used:{" "}
-          {
-            <div style={{ width: "80%" }}>
-              {project.techStack.map((tech, index) => {
-                return (
-                  <div
-                    key={index}
-                    style={{ display: "inline-grid", margin: "0 3px" }}
-                  >
-                    {tech}
-                  </div>
-                );
-              })}
-            </div>
-          }
+          Publisher: {<div style={{ margin: "0 3px" }}>{paper.publisher}</div>}
         </Typography>
         <Typography
           variant="subtitle1"
@@ -65,11 +52,11 @@ function ProjectCard({ project, setData }) {
           color="GrayText"
           style={{ textAlign: "center" }}
         >
-          Date: {project.startedOn}
+          Published on: {paper.publishedOn}
         </Typography>
       </div>
       <Typography variant="body1" gutterBottom>
-        {project.description}
+        {paper.abstract}
       </Typography>
       <div
         style={{
@@ -89,15 +76,15 @@ function ProjectCard({ project, setData }) {
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          href={project.link}
+          href={paper.docLink}
           target="_blank"
           rel="noopener"
         >
-          Open Project
+          Read Paper
         </Button>
       </div>
     </div>
   );
 }
 
-export default ProjectCard;
+export default ResearchPaperCard;

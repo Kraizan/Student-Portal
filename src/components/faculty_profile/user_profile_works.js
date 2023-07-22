@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import ProjectCard from "./project_card";
-import WorkExperienceCard from "./experience_card";
-import ResearchPaperCard from "./research_card";
+import ProjectCard from "../work_cards/project_card";
+import WorkExperienceCard from "../work_cards/experience_card";
+import ResearchPaperCard from "../work_cards/research_card";
 import { Card, CardContent, CardHeader } from "@mui/material";
-import ToggleWorksButton from "./toggle_works_button";
-import ExperienceForm from "./experience_form";
-import ProjectForm from "./project_form";
-import ResearchForm from "./research_form";
+import ToggleWorksButton from "../buttons/toggle_works_button";
+import ResearchForm from "../forms/research_form";
+import ProjectForm from "../forms/project_form";
+import ExperienceForm from "../forms/experience_form";
 
 function UserProfileWorks({ tempData, setData }) {
   const [showAllExperiences, setShowAllExperiences] = useState(false);

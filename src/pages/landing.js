@@ -1,7 +1,7 @@
 import { React } from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import LandingBanner from "../components/landing_banner";
+import LandingBanner from "../components/landing_page/landing_banner";
 
 function LandingPage() {
   return (

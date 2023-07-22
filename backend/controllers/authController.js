@@ -5,7 +5,7 @@ const config = require("../config/config.js");
 
 exports.signup = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, type } = req.body;
 
     // Check if user with the same email already exists
     const existingUser = await User.findOne({ email });
@@ -19,7 +19,7 @@ exports.signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
-    const user = new User({ email, password: hashedPassword });
+    const user = new User({ email, password: hashedPassword, type });
     await user.save();
 
     res.status(201).json(user);

@@ -1,24 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { Button, Typography } from "@mui/material";
 import RenderProjects from "./render_projects";
 import RenderPapers from "./render_papers";
 
 const ExploreSection = () => {
-  const [data, setData] = useState([]);
   const [displayType, setDisplayType] = useState("projects");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/api/students");
-      setData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   const handleDisplayType = (type) => {
     setDisplayType(type);
   };
@@ -66,8 +53,11 @@ const ExploreSection = () => {
           </Typography>
         </Button>
       </div>
-      <RenderProjects displayType={displayType} data={data} />
-      <RenderPapers displayType={displayType} data={data} />
+      {displayType === "projects" ? (
+        <RenderProjects displayType={displayType} />
+      ) : (
+        <RenderPapers displayType={displayType} />
+      )}
     </div>
   );
 };

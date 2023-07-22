@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ProfileForm from "../components/profile_form";
+import ProfileForm from "../components/student_profile/profile_form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 
-function EditProfilePage() {
+function EditProfileStudent() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function EditProfilePage() {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/students/${id}`
+            `http://localhost:8000/api/students/student/${id}`
           );
           const data = response.data;
           setData(data);
@@ -48,4 +48,4 @@ function EditProfilePage() {
   );
 }
 
-export default EditProfilePage;
+export default EditProfileStudent;

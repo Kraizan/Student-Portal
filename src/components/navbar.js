@@ -7,15 +7,19 @@ function Navbar() {
   const colorTheme = useTheme().palette;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  const profile = localStorage.getItem("profile");
+  const user = localStorage.getItem("user");
+  const type = localStorage.getItem("type");
+  const [profile, setProfilePicture] = useState("");
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const storedProfilePicture = localStorage.getItem("profile");
+    if (storedProfilePicture) {
+      setProfilePicture(storedProfilePicture);
+    }
     if (user) {
       setIsLoggedIn(true);
     }
-  }, [profile]);
+  }, [profile, user]);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -29,11 +33,24 @@ function Navbar() {
 
   const handleMenuClick = (route) => {
     handleMenuClose();
-    navigate(route);
+    if (route === "profile") {
+      console.log(type);
+      if (type === "student") {
+        navigate("/student-profile");
+      } else {
+        navigate("/faculty-profile");
+      }
+    } else if (route === "settings") {
+      if (type === "student") {
+        navigate("/edit-student-profile");
+      } else {
+        navigate("/edit-faculty-profile");
+      }
+    }
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem("user");
+    localStorage.clear();
     setIsLoggedIn(false);
     navigate("/login");
   };
@@ -83,10 +100,10 @@ function Navbar() {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={() => handleMenuClick("/student-profile")}>
+              <MenuItem onClick={() => handleMenuClick("profile")}>
                 My Profile
               </MenuItem>
-              <MenuItem onClick={() => handleMenuClick("/edit-profile")}>
+              <MenuItem onClick={() => handleMenuClick("settings")}>
                 Settings
               </MenuItem>
               <MenuItem onClick={handleLogOut}>Log out</MenuItem>

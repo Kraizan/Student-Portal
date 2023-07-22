@@ -9,9 +9,9 @@ import {
 } from "@mui/material";
 import { Devices, GitHub, LinkedIn } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
-import HyperlinkButton from "./hyperlink_button";
-import DeleteWorkButton from "./delete_work_button";
-import LinkForm from "./link_form";
+import HyperlinkButton from "../buttons/hyperlink_button";
+import DeleteWorkButton from "../buttons/delete_work_button";
+import LinkForm from "../forms/link_form";
 
 function UserProfileDetails({ tempData, setData }) {
   const colorTheme = useTheme().palette;

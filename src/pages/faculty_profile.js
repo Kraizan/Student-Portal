@@ -1,16 +1,16 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import ExploreSection from "../components/home_page/explore";
+import UserProfile from "../components/faculty_profile/user_profile";
 
-function HomePage() {
+function FacultyProfilePage() {
   return (
     <div>
       <Navbar />
-      <ExploreSection />
+      <UserProfile />
       <Footer />
     </div>
   );
 }
 
-export default HomePage;
+export default FacultyProfilePage;

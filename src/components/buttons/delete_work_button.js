@@ -8,11 +8,12 @@ function DeleteWorkButton({ data, setData }) {
     const id = localStorage.getItem("user");
     console.log(data);
     try {
-      await axios
-        .delete(`http://localhost:8000/api/students/${id}?workId=${data._id}`)
-        .then((res) => {
-          setData(res.data);
-        });
+      const type =
+        localStorage.getItem("type") === "student" ? "students" : "faculties";
+      const URL = `http://localhost:8000/api/${type}/${id}?workId=${data._id}`;
+      await axios.delete(URL).then((res) => {
+        setData(res.data);
+      });
     } catch (error) {
       console.log(error);
     }

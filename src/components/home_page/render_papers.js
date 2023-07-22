@@ -5,23 +5,46 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-function RenderProjects({ displayType, data }) {
-  if (displayType !== "projects") return null;
-  const projects = data.reduce((acc, student) => {
-    return [...acc, ...student.projects];
-  }, []);
-  const sortedProjects = projects.sort((a, b) => {
-    return new Date(a.startedOn) - new Date(b.startedOn);
-  });
-  return sortedProjects.map((project) => (
+function RenderPapers({ displayType }) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, [displayType]);
+
+  const fetchData = async () => {
+    try {
+      let response1 = await axios.get(
+        "http://localhost:8000/api/students/papers"
+      );
+      let response2 = await axios.get(
+        "http://localhost:8000/api/faculties/papers"
+      );
+      response1 = response1.data;
+      response2 = response2.data;
+      const response = response1.concat(response2);
+
+      if (displayType !== "researchPapers") return null;
+
+      const sortedResearchPapers = response.sort((a, b) => {
+        return new Date(a.publishedOn) - new Date(b.publishedOn);
+      });
+      setData(sortedResearchPapers);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return data.map((paper, index) => (
     <Card
-      key={project.title}
+      key={index}
       style={{ width: "60%", margin: "15px auto", padding: "10px" }}
     >
       <CardHeader
-        title={<div>{project.title}</div>}
+        title={<div>{paper.title}</div>}
         style={{ paddingBottom: "0" }}
       />
       <CardContent>
@@ -37,7 +60,7 @@ function RenderProjects({ displayType, data }) {
             gutterBottom
             style={{ display: "flex", width: "70%" }}
           >
-            Techstack Used: {project.techStack.join(", ")}
+            {paper.publisher}
           </Typography>
           <Typography
             variant="subtitle1"
@@ -45,11 +68,11 @@ function RenderProjects({ displayType, data }) {
             gutterBottom
             style={{ textAlign: "right" }}
           >
-            Date: {project.startedOn}
+            Date: {paper.publishedOn}
           </Typography>
         </div>
         <Typography variant="body1" gutterBottom>
-          {project.description}
+          {paper.abstract}
         </Typography>
       </CardContent>
       <CardContent style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -61,7 +84,7 @@ function RenderProjects({ displayType, data }) {
             fontWeight: "bold",
             textTransform: "none",
           }}
-          href={project.link}
+          href={paper.link}
           target="_blank"
           rel="noopener"
         >
@@ -72,4 +95,4 @@ function RenderProjects({ displayType, data }) {
   ));
 }
 
-export default RenderProjects;
+export default RenderPapers;

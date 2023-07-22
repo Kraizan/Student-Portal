@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import DeleteWorkButton from "./delete_work_button";
+import DeleteWorkButton from "../buttons/delete_work_button";
 
 function WorkExperienceCard({ data, setData }) {
   return (

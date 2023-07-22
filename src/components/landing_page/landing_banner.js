@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, useTheme } from "@mui/material";
-import LandingFeatures from "./landing_page/landing_feature";
+import LandingFeatures from "./landing_feature";
 import { Link } from "react-router-dom";
 
 function LandingBanner() {
